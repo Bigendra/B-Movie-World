@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B Movie World</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101018;
+      color: white;
+    }
+    header {
+      background: #e50914;
+      padding: 22px 16px;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 8px; }
+    header p { margin: 0; }
+    .search {
+      display: block;
+      width: 90%;
+      max-width: 500px;
+      padding: 13px;
+      margin: 22px auto;
+      border: 0;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    h2 { padding: 0 16px; }
+    .movies {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 16px;
+      padding: 16px;
+    }
+    .movie {
+      background: #242432;
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: center;
+      padding-bottom: 14px;
+    }
+    .poster {
+      height: 170px;
+      display: grid;
+      place-items: center;
+      font-size: 55px;
+      background: linear-gradient(145deg, #671313, #29294f);
+    }
+    .movie h3 { margin: 12px 5px 6px; }
+    .movie p { color: #ccccd8; margin: 5px; }
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #ccccd8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎬 B Movie World</h1>
+    <p>आपकी फिल्मों की दुनिया!</p>
+  </header>
+
+  <input id="search" class="search"
+    placeholder="फिल्म का नाम खोजें..."
+    oninput="searchMovies()">
+
+  <h2>⭐ लोकप्रिय फिल्में</h2>
+
+  <main class="movies" id="movies">
+    <article class="movie">
+      <div class="poster">🚀</div>
+      <h3>Space Adventure</h3>
+      <p>साइंस फिक्शन</p>
+    </article>
+    <article class="movie">
+      <div class="poster">🦸</div>
+      <h3>Super Hero</h3>
+      <p>एक्शन</p>
+    </article>
+    <article class="movie">
+      <div class="poster">😂</div>
+      <h3>Comedy Night</h3>
+      <p>कॉमेडी</p>
+    </article>
+    <article class="movie">
+      <div class="poster">👻</div>
+      <h3>Haunted House</h3>
+      <p>हॉरर</p>
+    </article>
+  </main>
+
+  <footer>
+    © 2026 B Movie World
+  </footer>
+
+  <script>
+    function searchMovies() {
+      const query = document.getElementById('search')
+        .value.toLowerCase();
+      document.querySelectorAll('.movie').forEach(movie => {
+        movie.style.display =
+          movie.innerText.toLowerCase().includes(query)
+            ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
