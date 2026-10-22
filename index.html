@@ -310,9 +310,9 @@
     <span class="tag">🚀 एक्शन</span>
     <h3>Nayi Movie Ka Naam</h3>
     <p>Yahan movie ki kahani ya detail likhein</p>
-    <button class="details-btn" data-title="Nayi Movie Ka Naam">
-      फ़िल्म के बारे में
-    </button>
+ <a href="super-hero.html" class="details-btn" style="display:inline-block; padding:8px 16px; background:#ff4757; color:white; text-decoration:none; border-radius:5px; margin-top:8px;">
+  फ़िल्म के बारे में
+ </a>
   </div>
 </article>
 
@@ -374,14 +374,6 @@
       });
     });
 
-    document.querySelectorAll(".details-btn").forEach(button => {
-      button.addEventListener("click", () => {
-        alert(
-          "फिल्म: " + button.dataset.title +
-          "\n\nयह जानकारी वाला पेज अभी बनाना बाकी है।"
-        );
-      });
-    });
   </script>
 </body>
 </html>
