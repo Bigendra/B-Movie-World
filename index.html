@@ -1,3 +1,371 @@
-<a href="space-adventure.html">
-    <!-- Aapka Movie Card -->
-</a>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101020">
+  <title>B Movie World - आपकी फिल्मों की दुनिया</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans Devanagari", sans-serif;
+      background: #101020;
+      color: #fff;
+    }
+
+    header {
+      background: linear-gradient(120deg, #e74c3c, #8128a8);
+      text-align: center;
+      padding: 30px 16px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(25px, 5vw, 38px);
+    }
+
+    header p {
+      margin: 10px 0 0;
+      font-size: 16px;
+    }
+
+    .search-area {
+      max-width: 650px;
+      padding: 20px 16px;
+      margin: auto;
+    }
+
+    #search {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #8b5cf6;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    #search:focus {
+      border-color: #ff6b6b;
+    }
+
+    main {
+      max-width: 1250px;
+      margin: auto;
+      padding: 0 18px 30px;
+    }
+
+    .section-title {
+      font-size: 25px;
+      margin: 10px 0 20px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .filter-btn {
+      border: 1px solid #514b75;
+      background: #24243c;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 22px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: #e74c3c;
+      border-color: #e74c3c;
+    }
+
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .movie {
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #202039;
+      border: 1px solid #302d4c;
+      transition: transform 0.2s;
+    }
+
+    .movie:hover {
+      transform: translateY(-5px);
+    }
+
+    .poster {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      display: block;
+      object-fit: cover;
+      background: linear-gradient(135deg, #42205f, #e74c3c);
+    }
+
+    .movie-info {
+      padding: 14px;
+    }
+
+    .movie h3 {
+      font-size: 18px;
+      margin: 0 0 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .movie p {
+      color: #c9c7df;
+      font-size: 14px;
+      margin: 0 0 12px;
+    }
+
+    .tag {
+      display: inline-block;
+      color: #ffd166;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .details-btn {
+      display: block;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      padding: 11px;
+      background: #e74c3c;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .details-btn:hover {
+      background: #c0392b;
+    }
+
+    #empty {
+      display: none;
+      padding: 30px 10px;
+      text-align: center;
+      color: #d5d1e8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 12px;
+      color: #c9c7df;
+      border-top: 1px solid #302d4c;
+      margin-top: 25px;
+    }
+
+    @media (max-width: 850px) {
+      .movie-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      header {
+        padding: 24px 10px;
+      }
+
+      main {
+        padding: 0 12px 24px;
+      }
+
+      .movie-grid {
+        gap: 10px;
+      }
+
+      .movie-info {
+        padding: 10px;
+      }
+
+      .movie h3 {
+        font-size: 16px;
+      }
+
+      .section-title {
+        font-size: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🎬 B Movie World</h1>
+    <p>आपकी फिल्मों की दुनिया!</p>
+  </header>
+
+  <div class="search-area">
+    <input
+      id="search"
+      type="search"
+      placeholder="🔎 फिल्म का नाम खोजें..."
+      aria-label="फिल्म का नाम खोजें"
+    >
+  </div>
+
+  <main>
+    <h2 class="section-title">⭐ लोकप्रिय फिल्में</h2>
+
+    <div class="filters">
+      <button class="filter-btn active" data-category="all">सभी फिल्में</button>
+      <button class="filter-btn" data-category="adventure">एडवेंचर</button>
+      <button class="filter-btn" data-category="action">एक्शन</button>
+      <button class="filter-btn" data-category="comedy">कॉमेडी</button>
+      <button class="filter-btn" data-category="horror">हॉरर</button>
+    </div>
+
+    <div class="movie-grid" id="movieGrid">
+
+      <article class="movie" data-category="adventure">
+        <img
+          class="poster"
+          src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=600&q=80"
+          alt="अंतरिक्ष एडवेंचर पोस्टर"
+          loading="lazy"
+        >
+        <div class="movie-info">
+          <span class="tag">🚀 एडवेंचर</span>
+          <h3>Space Adventure</h3>
+          <p>अंतरिक्ष की रोमांचक दुनिया</p>
+          <button class="details-btn" data-title="Space Adventure">
+            फिल्म के बारे में
+          </button>
+        </div>
+      </article>
+
+      <article class="movie" data-category="action">
+        <img
+          class="poster"
+          src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80"
+          alt="सुपर हीरो फिल्म पोस्टर"
+          loading="lazy"
+        >
+        <div class="movie-info">
+          <span class="tag">🦸 एक्शन</span>
+          <h3>Super Hero</h3>
+          <p>हीरो और रोमांच की कहानी</p>
+          <button class="details-btn" data-title="Super Hero">
+            फिल्म के बारे में
+          </button>
+        </div>
+      </article>
+
+      <article class="movie" data-category="comedy">
+        <img
+          class="poster"
+          src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80"
+          alt="कॉमेडी फिल्म पोस्टर"
+          loading="lazy"
+        >
+        <div class="movie-info">
+          <span class="tag">😂 कॉमेडी</span>
+          <h3>Comedy Night</h3>
+          <p>हँसी और मनोरंजन का समय</p>
+          <button class="details-btn" data-title="Comedy Night">
+            फिल्म के बारे में
+          </button>
+        </div>
+      </article>
+
+      <article class="movie" data-category="horror">
+        <img
+          class="poster"
+          src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=600&q=80"
+          alt="हॉरर फिल्म पोस्टर"
+          loading="lazy"
+        >
+        <div class="movie-info">
+          <span class="tag">👻 हॉरर</span>
+          <h3>Haunted House</h3>
+          <p>रहस्यमयी घर की डरावनी कहानी</p>
+          <button class="details-btn" data-title="Haunted House">
+            फिल्म के बारे में
+          </button>
+        </div>
+      </article>
+      <article class="movie" data-category="horror">
+    ...
+</article>
+  
+
+    </div>
+
+    <div id="empty">
+      <h3>😕 कोई फिल्म नहीं मिली</h3>
+      <p>दूसरा नाम लिखकर खोजें या सभी फिल्में चुनें।</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 B Movie World</p>
+    <p>आपका मनोरंजन, हमारी दुनिया ❤️</p>
+  </footer>
+
+  <script>
+    const search = document.getElementById("search");
+    const movies = [...document.querySelectorAll(".movie")];
+    const buttons = [...document.querySelectorAll(".filter-btn")];
+    const empty = document.getElementById("empty");
+
+    let selectedCategory = "all";
+
+    function filterMovies() {
+      const query = search.value.trim().toLocaleLowerCase();
+      let visibleCount = 0;
+
+      movies.forEach(movie => {
+        const text = movie.innerText.toLocaleLowerCase();
+        const matchesText = text.includes(query);
+        const matchesCategory =
+          selectedCategory === "all" ||
+          movie.dataset.category === selectedCategory;
+
+        const visible = matchesText && matchesCategory;
+        movie.style.display = visible ? "" : "none";
+
+        if (visible) visibleCount++;
+      });
+
+      empty.style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+    search.addEventListener("input", filterMovies);
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        selectedCategory = button.dataset.category;
+
+        buttons.forEach(item => {
+          item.classList.toggle("active", item === button);
+        });
+
+        filterMovies();
+      });
+    });
+
+    document.querySelectorAll(".details-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        alert(
+          "फिल्म: " + button.dataset.title +
+          "\n\nयह जानकारी वाला पेज अभी बनाना बाकी है।"
+        );
+      });
+    });
+  </script>
+</body>
+</html>
